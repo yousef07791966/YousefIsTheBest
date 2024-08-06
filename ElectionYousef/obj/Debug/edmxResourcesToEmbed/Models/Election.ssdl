@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ElectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="APPLICATIONS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocalList_ID" Type="int" Nullable="false" />
+    <Property Name="PartyList_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactForm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Date">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Start_Date_Of_Nominate" Type="date" Nullable="false" />
+    <Property Name="End_Date_Of_Nominate" Type="date" Nullable="false" />
+    <Property Name="Start_Date_Of_Election" Type="date" Nullable="false" />
+    <Property Name="End_Date_Of_Election" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Debates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Circle_ID" Type="int" />
+    <Property Name="Date_Of_Debate" Type="date" />
+    <Property Name="Topic" Type="nvarchar" MaxLength="255" />
+    <Property Name="First_Candidate" Type="nvarchar" MaxLength="255" />
+    <Property Name="First_Candidate_List" Type="nvarchar" MaxLength="255" />
+    <Property Name="Second_Candidate" Type="nvarchar" MaxLength="255" />
+    <Property Name="Second_Candidate_List" Type="nvarchar" MaxLength="255" />
+    <Property Name="Status" Type="varchar" MaxLength="255" />
+    <Property Name="Zoom_link" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ElectionAdvertisements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="National_ID" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="List_Or_Party_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Circle_ID" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="URL" Type="varchar(max)" />
+    <Property Name="Status" Type="varchar" MaxLength="255" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Election.dbo.localCandidates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="localCandidates">
+    <Key>
+      <PropertyRef Name="National_ID" />
+      <PropertyRef Name="Candidate_Name" />
+      <PropertyRef Name="Type_of_Chair" />
+      <PropertyRef Name="List_Name" />
+      <PropertyRef Name="Counter" />
+      <PropertyRef Name="List_ID" />
+    </Key>
+    <Property Name="National_ID" Type="int" Nullable="false" />
+    <Property Name="Candidate_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Type_of_Chair" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="List_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Counter" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="picture" Type="varchar(max)" />
+    <Property Name="List_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="localList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Delegate_ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Circle_ID" Type="int" Nullable="false" />
+    <Property Name="list_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="list_Candidates" Type="int" Nullable="false" />
+    <Property Name="Delegate_ID" Type="int" Nullable="false" />
+    <Property Name="Delegate_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Delegate_Phone" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Delegate_Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Counter" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="255" />
+    <Property Name="reason" Type="varchar(max)" />
+    <Property Name="List_Logo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="PartyCandidates">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="National_ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="National_ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Religion" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="PartyLIST_ID" Type="int" Nullable="false" />
+    <Property Name="picture" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="PartyList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Delegate_ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Party_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="List_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Delegate_ID" Type="int" Nullable="false" />
+    <Property Name="Delegate_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Delegate_Phone" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Delegate_Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Counter" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="255" />
+    <Property Name="reason" Type="varchar(max)" />
+    <Property Name="List_Logo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="PayPalPayments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertisementID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Currency" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="PaymentStatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PayPalPayments_APPLICATIONS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="APPLICATION_ID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Currency" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="PaymentStatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PaymentDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="National_ID" />
+    </Key>
+    <Property Name="National_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="Circle_ID" Type="int" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="local_Vote" Type="int" Nullable="false" />
+    <Property Name="Party_Vote" Type="int" Nullable="false" />
+    <Property Name="White_Local_Vote" Type="int" Nullable="false" />
+    <Property Name="White_Party_Vote" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__APPLICATI__Local__5629CD9C' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__APPLICATI__Local__5629CD9C" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__APPLICATI__Party__571DF1D5' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__APPLICATI__Party__571DF1D5" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__localCand__List___3C69FB99' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__localCand__List___3C69FB99" />-->
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PartyCand__Party__4316F928' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PartyCand__Party__4316F928" />-->
+  <Association Name="FK__PayPalPay__Adver__5165187F">
+    <End Role="ElectionAdvertisements" Type="Self.ElectionAdvertisements" Multiplicity="1" />
+    <End Role="PayPalPayments" Type="Self.PayPalPayments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ElectionAdvertisements">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PayPalPayments">
+        <PropertyRef Name="AdvertisementID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PayPalPay__APPLI__5BE2A6F2">
+    <End Role="APPLICATIONS" Type="Self.APPLICATIONS" Multiplicity="1" />
+    <End Role="PayPalPayments_APPLICATIONS" Type="Self.PayPalPayments_APPLICATIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="APPLICATIONS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PayPalPayments_APPLICATIONS">
+        <PropertyRef Name="APPLICATION_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ElectionModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APPLICATIONS" EntityType="Self.APPLICATIONS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactForm" EntityType="Self.ContactForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Date" EntityType="Self.Date" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Debates" EntityType="Self.Debates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ElectionAdvertisements" EntityType="Self.ElectionAdvertisements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="localList" EntityType="Self.localList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartyCandidates" EntityType="Self.PartyCandidates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartyList" EntityType="Self.PartyList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayPalPayments" EntityType="Self.PayPalPayments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayPalPayments_APPLICATIONS" EntityType="Self.PayPalPayments_APPLICATIONS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="localCandidates" EntityType="Self.localCandidates" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [localCandidates].[National_ID] AS [National_ID], 
+    [localCandidates].[Candidate_Name] AS [Candidate_Name], 
+    [localCandidates].[Type_of_Chair] AS [Type_of_Chair], 
+    [localCandidates].[List_Name] AS [List_Name], 
+    [localCandidates].[Counter] AS [Counter], 
+    [localCandidates].[picture] AS [picture], 
+    [localCandidates].[List_ID] AS [List_ID]
+    FROM [dbo].[localCandidates] AS [localCandidates]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__PayPalPay__Adver__5165187F" Association="Self.FK__PayPalPay__Adver__5165187F">
+      <End Role="ElectionAdvertisements" EntitySet="ElectionAdvertisements" />
+      <End Role="PayPalPayments" EntitySet="PayPalPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PayPalPay__APPLI__5BE2A6F2" Association="Self.FK__PayPalPay__APPLI__5BE2A6F2">
+      <End Role="APPLICATIONS" EntitySet="APPLICATIONS" />
+      <End Role="PayPalPayments_APPLICATIONS" EntitySet="PayPalPayments_APPLICATIONS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
